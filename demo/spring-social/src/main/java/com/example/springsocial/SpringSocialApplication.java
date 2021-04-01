@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @SpringBootApplication
 @EnableConfigurationProperties({AppProperties.class})
 @CrossOrigin(value = "http://localhost:3000")
+
 public class SpringSocialApplication {
 
 	public static void main(String[] args) {

@@ -1,6 +1,5 @@
 package vn.vnpt.sso.security.oauth2.user;
 
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import vn.vnpt.sso.entity.AuthProvider;
 import vn.vnpt.sso.exception.OAuth2AuthenticationProcessingException;
 
