@@ -5,6 +5,7 @@ import com.clone.instagram.authservice.model.InstaUserDetails;
 import com.clone.instagram.authservice.model.User;
 import com.clone.instagram.authservice.payload.*;
 import com.clone.instagram.authservice.service.UserService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

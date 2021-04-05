@@ -4,7 +4,7 @@ import {
   UserOutlined,
   LockOutlined,
   DingtalkOutlined,
-  FacebookFilled,
+  FacebookFilled
 } from "@ant-design/icons";
 import { login, facebookLogin } from "../util/ApiUtil";
 import "./Signin.css";

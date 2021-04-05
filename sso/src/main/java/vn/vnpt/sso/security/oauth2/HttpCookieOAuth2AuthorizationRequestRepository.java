@@ -20,7 +20,7 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
     /**
      * Đường dẫn url xác thực
      */
-    public static final String REDIRECT_URI_PARAM_COOKIE_NAME = "request_uri";
+    public static final String REDIRECT_URI_PARAM_COOKIE_NAME = "redirect_uri";
 
     /**
      * Thời hạn của cookie

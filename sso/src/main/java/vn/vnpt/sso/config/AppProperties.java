@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ConfigurationProperties(prefix = "app")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AppProperties {
     private final Auth auth = new Auth();
     private final OAuth2 oauth2 = new OAuth2();
@@ -18,7 +21,7 @@ public class AppProperties {
     @AllArgsConstructor
     public static class Auth {
         private String tokenSecret;
-        private String tokenExpirationMsec;
+        private long tokenExpirationMsec;
     }
 
     @Data
@@ -26,5 +29,7 @@ public class AppProperties {
     @AllArgsConstructor
     public static class OAuth2 {
         private List<String> authorizedRedirectUris = new ArrayList<>();
+
     }
+
 }

@@ -1,6 +1,8 @@
 package vn.vnpt.sso.security.oauth2;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -11,6 +13,7 @@ import vn.vnpt.sso.entity.AuthProvider;
 import vn.vnpt.sso.entity.User;
 import vn.vnpt.sso.exception.OAuth2AuthenticationProcessingException;
 import vn.vnpt.sso.repository.UserRepository;
+import vn.vnpt.sso.security.UserPrincipal;
 import vn.vnpt.sso.security.oauth2.user.OAuth2UserInfo;
 import vn.vnpt.sso.security.oauth2.user.OAuth2UserInfoFactory;
 
@@ -21,18 +24,23 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Hàm load thông tin user khi đăng nhập
+     *
+     * @param userRequest thông tin user ở request gửi về
+     * @return
+     * @throws OAuth2AuthenticationException
+     */
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oauth2User = super.loadUser(userRequest);
-
         try {
-
-        } catch (Exception e) {
-
+            return processOAuth2User(userRequest, oauth2User);
+        } catch (AuthenticationException e) {
+            throw e;
+        } catch (Exception ex) {
+            throw new InternalAuthenticationServiceException(ex.getMessage(), ex.getCause());
         }
-
-
-        return super.loadUser(userRequest);
     }
 
     /**
@@ -40,7 +48,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
      *
      * @param request    request
      * @param oAuth2User thông tin user khi xác thực
-     * @return
+     * @return UserPrincipal
      */
     public OAuth2User processOAuth2User(OAuth2UserRequest request, OAuth2User oAuth2User) {
         // Thông tin của user đang đăng nhập bằng social
@@ -65,11 +73,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             }
             // cập nhật lại thông tin user
             user = updateExistingUser(user, oauth2UserInfo);
-        } else {
-            user = registerNewUser(request,oauth2UserInfo);
-
+        } else { // Trường hợp chưa đăng ký thì tự động đăng ký cho user mới
+            user = registerNewUser(request, oauth2UserInfo);
         }
-
         return UserPrincipal.create(user, oAuth2User.getAttributes());
     }
 

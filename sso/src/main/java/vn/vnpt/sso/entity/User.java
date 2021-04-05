@@ -10,7 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "users", uniqueConstraints = {
+@Table(name = "usersso", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
 })
 @Data
@@ -18,7 +18,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     @Column(name = "id")
     private Long id;
 
