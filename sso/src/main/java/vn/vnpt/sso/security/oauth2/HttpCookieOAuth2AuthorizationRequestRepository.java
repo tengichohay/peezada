@@ -9,6 +9,9 @@ import vn.vnpt.sso.util.CookieUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Lớp này hiện lưu trữ, theo dõi hoạt động của user lưu thông tin vào cookie
+ */
 @Component
 public class HttpCookieOAuth2AuthorizationRequestRepository implements AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
 
@@ -25,7 +28,7 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
     /**
      * Thời hạn của cookie
      */
-    public static final int cookieExpireSeconds = 180;
+    public static final int cookieExpireSeconds = 180000;
 
     /**
      * Hàm load thông tin xác thực từ request

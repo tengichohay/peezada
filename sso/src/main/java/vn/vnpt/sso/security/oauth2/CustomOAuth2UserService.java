@@ -19,6 +19,10 @@ import vn.vnpt.sso.security.oauth2.user.OAuth2UserInfoFactory;
 
 import java.util.Optional;
 
+/**
+ * Lớp này thực hiện xử phần thông tin của user khi đăng nhập thành công
+ * Load thông tin user, đăng ký khi user đăng ký
+ */
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Autowired
